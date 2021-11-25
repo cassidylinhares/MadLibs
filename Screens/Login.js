@@ -1,10 +1,15 @@
 import React, {useState} from 'react'
+import { useNavigation} from '@react-navigation/native'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const navigation = useNavigation()
+
+
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -34,7 +39,7 @@ const Login = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.buttonOutline]}
-                    onPress={()=> {}}
+                    onPress={()=> {navigation.navigate("Home")}}
                 >
                     <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
