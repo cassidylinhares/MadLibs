@@ -1,19 +1,57 @@
-import React, {useState} from 'react'
-import { useNavigation} from '@react-navigation/native'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from '@firebase/auth';
+import { useNavigation } from '@react-navigation/core';
+import React, {useState, useEffect} from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import { auth } from '../firebase';
 
 const Login = () => {
+    const navigation = useNavigation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const navigation = useNavigation()
+    const handleRegister = () => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            //user signed in
+            const user = userCredential.user;
+            console.log(user.email);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
 
+            console.error(errorCode, errorMessage);
+        });
+    }
+
+    const handleLogin = () => {
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            //user signed in
+            const user = userCredential.user;
+            console.log(user.email);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            console.error(errorCode, errorMessage);
+        });
+    }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, user=> {
+            if(user) {
+                navigation.navigate('Home');
+            }
+        });
+        return unsubscribe;
+    }, []);
 
     return (
         <KeyboardAvoidingView
             style={styles.container}
-            behavior="padding"
+            behavior="height"
         >
             <View style={styles.inputContainer}>
                 <TextInput
@@ -33,13 +71,13 @@ const Login = () => {
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={()=> {}}
+                    onPress={handleLogin}
                 >
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.buttonOutline]}
-                    onPress={()=> {navigation.navigate("Home")}}
+                    onPress={handleRegister}
                 >
                     <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
