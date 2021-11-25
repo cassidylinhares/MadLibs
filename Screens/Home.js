@@ -1,14 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
+import themes from "../../consts/themes "
+import COLORS from "../../consts/colors"
 
 const Home = () => {
     return (
-        <View>
-            <Text>Home Screen</Text>
-        </View>
+        <SafeAreaView style={style.area}>
+            <FlatList numColumns={2} data={themes}/>
+        </SafeAreaView>
     )
 }
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    area: {
+        flex: 1,
+        paddingHorizontal: 20,
+        backgroundColor: COLORS.white,
+
+    }
+})
