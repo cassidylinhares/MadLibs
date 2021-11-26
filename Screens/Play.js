@@ -16,7 +16,7 @@ const Play = ({navigation, route}) => {
             <View style={styles.detailsContainer}>
                 <View style={{paddingHorizontal: 20, marginTop: 10}}>
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tease</Text>
-                    <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 20}}>{theme.about}</Text>
+                    <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{theme.about}</Text>
                 </View>
                 <View style={styles.btn}>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>PLAY</Text>
