@@ -1,11 +1,9 @@
 import React from 'react'
 import {View, Text, SafeAreaView, StyleSheet, FlatList, Dimensions, TouchableOpacity, Image} from 'react-native';
+import themes from '../consts/themes';
 const width = Dimensions.get("screen").width/2-30
 
 const Home = () => {
-
-    const themes = [{id:1, name: 'christmas',}, {id:2, name:'halloween'}, {id:3, name:'fish'}, {id:4, name:'fire'}, {id:5, name:'flower'}, {id:6, name:'sky'},];
-
     const categories=['ALL', 'MOVIES', 'HOLIDAYS', 'RANDOM'];
 
     const [categoryIndex, setCateoryIndex] = React.useState(0);
