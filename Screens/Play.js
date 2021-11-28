@@ -5,6 +5,10 @@ import {View, Text, Image, SafeAreaView, StyleSheet} from 'react-native'
 const Play = ({navigation, route}) => {
     const theme = route.params;
 
+    const handlePlayButton = () => {
+        navigation.navigate("Game", theme);
+    }
+
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#CBC3E3"}}>
             <View style={styles.header}>
@@ -19,7 +23,7 @@ const Play = ({navigation, route}) => {
                     <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{theme.about}</Text>
                 </View>
                 <View style={styles.btn}>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>PLAY</Text>
+                    <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}} onPress={handlePlayButton}>PLAY</Text>
                 </View>
             </View>
             

@@ -7,12 +7,12 @@ const Home = ({navigation}) => {
 
     //array for the cards with respective images and about info (tease)
     const themes = [
-        {id:1, name:'christmas',img: require("../assets/images/xmas.jpg"), about: "It's looking a lot like Christmas. We're making it up as we go along, here's a Christmas story for you!"}, 
-        {id:2, name:'meangirls',img: require("../assets/images/meangirls.jpg"), about: "Get in loser, we're playing madlibs. We're making it up as we go along, here's a story from the all time classic for you!"},
-        {id:3, name:'halloween', img: require("../assets/images/halloween.jpg"),about: "OoooH, spooooky. We're making it up as we go along, here's a Halloween story for you!"}, 
-        {id:4, name:'mystery1', img: require("../assets/images/mystery.jpg"),about: "Hmm, secretive. You gotta play to find out cause we're making it up as we go along. Here's a mystery story for you!"}, 
+        {id:"A Crazy Thanksgiving", name:'Thanksgiving', img: require("../assets/images/xmas.jpg"), about: "It's looking a lot like Christmas. We're making it up as we go along, here's a Christmas story for you!"}, 
+        {id:"The Plastics", name:'meangirls', img: require("../assets/images/meangirls.jpg"), about: "Get in loser, we're playing madlibs. We're making it up as we go along, here's a story from the all time classic for you!"},
+        {id:"Halloween", name:'halloween', img: require("../assets/images/halloween.jpg"),about: "OoooH, spooooky. We're making it up as we go along, here's a Halloween story for you!"}, 
+        {id:"Plot Twist", name:'mystery1', img: require("../assets/images/mystery.jpg"),about: "Hmm, secretive. You gotta play to find out cause we're making it up as we go along. Here's a mystery story for you!"}, 
         {id:5, name:'mystery2', img: require("../assets/images/mystery.jpg"), about: "Hmm, secretive. You gotta play to find out cause we're making it up as we go along. Here's a mystery story for you!"}, 
-        {id:6, name:'spiderman', img: require("../assets/images/spiderman.jpg"),about: "We're making it up as we go along. Here's a Christmas story for you!"},];
+        {id:"Clash with the Cops", name:'spiderman', img: require("../assets/images/spiderman.jpg"),about: "We're making it up as we go along. Here's a Christmas story for you!"},];
 
     const categories=['ALL', 'MOVIES', 'HOLIDAYS', 'RANDOM']; //array holding the category titles
 
@@ -46,7 +46,6 @@ const Home = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate("Play", theme)}>
             <View style={styles.card}>
                  <Image style={{flex: 1,height: 225, width: 120, resizeMode: 'cover'}} source={theme.img} />
-
             </View> 
         </TouchableOpacity>
 

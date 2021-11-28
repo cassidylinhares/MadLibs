@@ -1,11 +1,10 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
-import COLORS from "../consts/colors"
 import { auth } from '../firebase'
 
-const Profile = () => {
-    const navigation = useNavigation();
+const Profile = ({navigation}) => {
+    //do this when sign out button is pressed
     const handleSignout = () => {
         auth.signOut()
         .then(() => {
@@ -19,6 +18,7 @@ const Profile = () => {
         });
     }
 
+    //the ui design
     return (
         <SafeAreaView style={styles.container}>
             <Text>{auth.currentUser?.email}</Text>
@@ -29,13 +29,15 @@ const Profile = () => {
     )
 }
 
+//allow this component to be used elsewhere in the code
 export default Profile;
 
+//style (css) to the ui
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        backgroundColor: COLORS.white,
+        backgroundColor: 'white',
         justifyContent:'center',
         alignItems:'center',
     },

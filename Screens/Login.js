@@ -39,6 +39,7 @@ const Login = () => {
         });
     }
 
+    //on component dismount
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user=> {
             if(user) {
