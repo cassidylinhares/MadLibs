@@ -20,10 +20,6 @@ const Game = ({navigation, route}) => {
         fetchStory();    
     }, []);
 
-    const handleReadButton = () => {
-        navigation.navigate("Result", theme);
-    }
-
     //makes the ui for the blank word types
     const mapBlanks = () => {
         //handler when user changes the text
@@ -49,7 +45,7 @@ const Game = ({navigation, route}) => {
             </View>
             {story !== null && mapBlanks()}
             <View style={styles.btn} >
-                <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}} onPress={handleReadButton}>Read Story</Text>
+                <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>Read Story</Text>
             </View>
         </View>
         
