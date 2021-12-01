@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import * as Speech from 'expo-speech';
 import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, ScrollView } from 'react-native';
 
 //route has story and blanks
 const Result = ({navigation, route}) => {
     console.log(route)
-    const [story, setStory] = useState(route.params.story);
-    const [blanks, setBlanks] = useState(route.params.blanks);
+    const story = route.params.story;
+    const blanks = route.params.blanks;
 
     const fillStory = () => {
-        const words = story?.story?.split(' ');
-        for(let i=0; i< blanks.length; i++){
+        let words = story.story.split(' ');
+        for(let i=0; i < words.length; i++){
+            console.log(words[i].includes('_'), words[i])
             if(words[i].includes('_')) {
-                let filled = words[i].replace('_', blanks[i]);
+                let filled = words[i].replace('_', blanks.shift());
                 words[i] = filled;
             }
         }
+
         return words.join(' ');
     }
 
     const saveBtnHandler = () => {}
     const backBtnHandler = () => {}
+    const repeatBtnHandler = () => {
+        Speech.speak(filledStory);
+    }
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
@@ -30,6 +36,9 @@ const Result = ({navigation, route}) => {
                 <View style={styles.body}>
                     <Text>{fillStory()}</Text>
                 </View>
+                <TouchableOpacity style={styles.btn} onPress={repeatBtnHandler}>
+                    <Text style={styles.btnText}>Play Audio</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.btn} onPress={saveBtnHandler}>
                     <Text style={styles.btnText}>Save</Text>
                 </TouchableOpacity>
