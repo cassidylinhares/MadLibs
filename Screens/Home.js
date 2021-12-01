@@ -59,7 +59,9 @@ const Home = ({navigation}) => {
               <View>
                 <Text style={{fontSize: 30, fontWeight: 'bold', color: 'black'}}>MAD LIBS</Text>
               </View>
-              <Icon style={{marginTop: 7,}} name="bars" size={30} color="#5D3FD3"/>
+              <TouchableOpacity>
+              <Icon style={{marginTop: 7,}} name="bars" size={30} color="#5D3FD3" onPress={() => navigation.navigate("Profile")}/>
+              </TouchableOpacity>
             </View>
            
            {/*Calling the CategoryList function as a tag */}
