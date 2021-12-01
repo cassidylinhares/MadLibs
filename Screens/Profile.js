@@ -22,8 +22,8 @@ const Profile = ({navigation}) => {
             navigation.navigate('Result', {story: story, blanks: story?.filled, fromSaved: true});
         }
         return savedStories?.map((story,i) => (
-            <TouchableOpacity key={i} onPress={(e)=>savedStoryHandler(e, story)}>
-                <Text>{story?.title}</Text>
+            <TouchableOpacity style={styles.btnContainer} key={i} onPress={(e)=>savedStoryHandler(e, story)}>
+                <Text style={styles.btnText}>{story?.title}</Text>
             </TouchableOpacity>
         ));
     }
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     },
     container: {
         alignSelf:'center',
-        flexDirection:'row',
         justifyContent:'center',
         backgroundColor:"white",
         width:'100%',
@@ -121,6 +120,20 @@ const styles = StyleSheet.create({
         shadowOpacity:80,
         elevation:15,
         marginTop:50
+    },
+    btnContainer:{
+        alignSelf:'center',
+        width: 200,
+        height: 20,
+        backgroundColor: '#5D3FD3',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 30,
+        marginVertical: 5,
+    },
+    btnText: {
+        color: 'white', 
+        fontSize: 14, 
     },
     text: {
         fontWeight:'bold', 

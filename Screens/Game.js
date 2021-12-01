@@ -32,8 +32,8 @@ const Game = ({navigation, route}) => {
         }
         //the ui
         return story?.blanks?.map((blank, index) => (
-            <View style={styles.title} key={index}>
-                <TextInput onChangeText={text => handleBlankInput(text, index)}/>
+            <View style={styles.inputContainer} key={index}>
+                <TextInput style={styles.input} onChangeText={text => handleBlankInput(text, index)}/>
                 <Text>{blank}</Text>
             </View>
         ));
@@ -48,13 +48,15 @@ const Game = ({navigation, route}) => {
     return (
         <SafeAreaView style={styles.backgroundContainer}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-                <Icon style={{marginTop: 30}} name="arrow-back" size={28}/>
+                <Icon style={{marginTop: 30, marginStart: 15}} name="arrow-back" size={28}/>
             </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
                 <View style={styles.title}>
-                    <Text style={styles.btnText}>{story?.title}</Text>
+                    <Text style={styles.titleText}>{story?.title}</Text>
                 </View>
-                {story !== null && mapBlanks()}
+                <View style={styles.inputOutterContainer}>
+                    {story !== null && mapBlanks()}
+                </View>
                 <TouchableOpacity style={styles.btn} onPress={readStoryBtnHandler}>
                     <Text style={styles.btnText}>Read Story</Text>
                 </TouchableOpacity>
@@ -64,19 +66,16 @@ const Game = ({navigation, route}) => {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        paddingHorizontal: 20,
-        marginTop: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
     title: {
-        flex: 0.15,
+        flex: 0.10,
         marginTop: 5,
-        color: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-
+    },
+    titleText: {
+        color: 'black',
+        fontSize: 24,
+        fontWeight: '500',
     },
     backgroundContainer: {
         flex: 1, 
@@ -86,21 +85,36 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 100,
         backgroundColor: "#F8F8F8",
-        marginHorizontal: 15,
-        borderRadius: 20,
-        marginTop: 30,
-        paddingTop: 30
+        marginHorizontal: 10,
+        borderRadius: 10,
+        marginTop: 20,
+        paddingTop: 20
+    },
+    inputOutterContainer: {
+        marginTop: 20,
+    },
+    inputContainer: {
+        flex: 1,
+        flexDirection:'row',
+        justifyContent: 'flex-start',
+        alignItems:'baseline',
+        marginTop: 10,
+    },
+    input:{
+        borderColor: '#5D3FD3',
+        borderWidth: 1,
+        borderRadius: 7,
+        marginHorizontal:30
     },
     btn: {
         marginTop: 50,
         width: 290,
-        marginHorizontal: 20,
+        marginHorizontal: 35,
         height: 70,
         backgroundColor: '#5D3FD3',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-
     },
     btnText: {
         color: 'white', 

@@ -39,6 +39,7 @@ const Result = ({navigation, route}) => {
     }
 
     const repeatBtnHandler = () => {
+        Speech.stop();
         Speech.speak(fillStory(story.story, blanks));
     }
 
@@ -54,17 +55,19 @@ const Result = ({navigation, route}) => {
                 <View style={styles.body}>
                     <Text>{fillStory(story.story, blanks)}</Text>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={repeatBtnHandler}>
-                    <Text style={styles.btnText}>Play Audio</Text>
-                </TouchableOpacity>
-                {!fromProfile && 
-                    <TouchableOpacity style={styles.btn} onPress={saveBtnHandler}>
-                        <Text style={styles.btnText}>Save</Text>
+                <View style={styles.btnGroup}>
+                    <TouchableOpacity style={styles.btn} onPress={repeatBtnHandler}>
+                        <Text style={styles.btnText}>Play Audio</Text>
                     </TouchableOpacity>
-                }
-                <TouchableOpacity style={styles.btn} onPress={playAgainHandler}>
-                    <Text style={styles.btnText}>Play Again</Text>
-                </TouchableOpacity>
+                    {!fromProfile && 
+                        <TouchableOpacity style={styles.btn} onPress={saveBtnHandler}>
+                            <Text style={styles.btnText}>Save</Text>
+                        </TouchableOpacity>
+                    }
+                    <TouchableOpacity style={styles.btn} onPress={playAgainHandler}>
+                        <Text style={styles.btnText}>Play Again</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -77,25 +80,16 @@ const styles = StyleSheet.create({
         flex: 1, 
         backgroundColor: "#CBC3E3"
     },
-    header: {
-        paddingHorizontal: 20,
-        marginTop: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
     title: {
-        flex: 0.15,
+        flex: 0.10,
         marginTop: 5,
-        color: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     titleText: {
-        color: 'grey', 
-        fontSize:16, 
-        lineHeight: 22, 
-        marginTop: 8
+        color: 'black',
+        fontSize: 24,
+        fontWeight: '500',
     },
     detailsContainer: {
         flex: 1,
@@ -106,11 +100,22 @@ const styles = StyleSheet.create({
         marginTop: 30,
         paddingTop: 30
     },
-    btn: {
-        marginTop: 50,
-        width: 290,
+    body: {
+        marginTop: 20,
         marginHorizontal: 20,
-        height: 70,
+    },
+    btnGroup: {
+        flex: 1,
+        flexDirection:'row',
+        justifyContent: 'center',
+        alignItems:'baseline',
+        marginTop: 10,
+    },
+    btn: {
+        marginTop: 10,
+        width: 100,
+        marginHorizontal: 5,
+        height: 35,
         backgroundColor: '#5D3FD3',
         justifyContent: 'center',
         alignItems: 'center',
@@ -119,7 +124,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: 'white', 
-        fontSize: 18, 
+        fontSize: 14, 
         fontWeight: 'bold',
     },
 });
