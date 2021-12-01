@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react'
-import { Dimensions, StyleSheet, Text, View, Container } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Dimensions, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 //Import React Native Video to play video
 import {Video} from 'expo-av';
 /*
@@ -80,13 +81,15 @@ from 'react-native-media-controls';
 
 const {width, height} = Dimensions.get('window');
 
-const VideoPlayer = () => {
+const VideoPlayer = ({navigation}) => {
   return (
-    
     <View style={{flex:1, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center'}}>
+      <TouchableOpacity onPress={()=>navigation.goBack()}>
+        <Icon style={{marginTop: 10, marginStart: 15}} name="arrow-back" size={28}/>
+      </TouchableOpacity>
       <Video
         style={{width: width, height: height/3}}
-        source={require('../assets/madlibs.mp4')}
+        source={require('../assets/sample.mp4')}
         volume={1.0}
         isMuted={false}
         rate={1.0}

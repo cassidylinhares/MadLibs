@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#CBC3E3"
     },
     backBtn: {
-        marginTop: 15,
+        marginTop: 25,
         marginStart: 15,
     },
     title: {
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection:'row',
         justifyContent: 'center',
-        alignItems:'baseline',
+        alignItems:'center',
         marginTop: 10,
     },
     btn: {
