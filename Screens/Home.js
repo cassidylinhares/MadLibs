@@ -68,6 +68,7 @@ const Home = ({navigation}) => {
             <CategoryList/> 
             
              {/*Flatlist is a 'table' like tag, to make the layout of card display in 2 columns */}
+             {/*Rendering the item to the function 'Card' */}
             <FlatList  
                 columnWrapperStyle={{justifyContent: 'space-between'}}
                 showsVerticalScrollIndicator= {false}
