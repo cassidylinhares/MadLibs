@@ -1,22 +1,28 @@
-import { useNavigation } from '@react-navigation/core'
 import React, { useState, useEffect } from 'react'
-import { StyleSheet,ScrollView, Text, View, FlatList, TouchableOpacity, Image, TextInput, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { auth, getSavedStories } from '../firebase'
-import { fillStory } from '../consts/common';
 
 const Profile = ({navigation}) => {
-    const [savedStories, setSavedStories] = useState([]);
+    const [savedStories, setSavedStories] = useState([]); //load in the saved stories from the db
 
     //do this when component loads
     useEffect(() => {
         async function fetchSavedStory() {
             const storiesFetched = await getSavedStories();
-            setSavedStories([...storiesFetched]);
+            if(storiesFetched === "error") {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                console.error(errorCode, errorMessage);
+            } else {
+                setSavedStories([...storiesFetched]);
+            }
         } 
         fetchSavedStory(); 
     }, []);
 
+    // creates a list of saved stories as a button so user can hear what they entered
     const mapSavedStories = () => {
         const savedStoryHandler = (e, story) => {
             navigation.navigate('Result', {story: story, blanks: story?.filled, fromSaved: true});

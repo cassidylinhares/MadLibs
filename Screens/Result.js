@@ -7,37 +7,47 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 //route has story and blanks
 const Result = ({navigation, route}) => {
-    const story = route.params.story;
-    const blanks = route.params.blanks;
-    const fromProfile = route.params.fromSaved;
+    const story = route.params.story; //story from the db
+    const blanks = route.params.blanks; //users answers
+    const fromProfile = route.params.fromSaved; //check if story is a saved story or new story
 
+    //back button 
     const backBtnHandler = () => {
-        Speech.stop()
+        Speech.stop(); //stop any speech
         if(fromProfile) {
-            navigation.goBack()
+            navigation.goBack(); //go to profile if came from profile otherwise homepage
         }else{
-            navigation.navigate('Home')
+            navigation.navigate('Home');
         }
     }
 
+    //save button
     const saveBtnHandler = () => {
-        saveStory(story, blanks)
+        saveStory(story, blanks) //save story to db
         .then(res => {
             console.log(res);
             navigation.navigate('Home');
-            Speech.stop()
+            Speech.stop();
+        })
+        .catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            console.error(errorCode, errorMessage);
         });
     }
 
+    //play again button
     const playAgainHandler = () => {
-        Speech.stop()
-        if(!fromProfile) {
-            navigation.goBack()
+        Speech.stop();
+        if(!fromProfile) { //go to game page to play again
+            navigation.goBack();
         }else{
-            navigation.navigate('Game', story.title)
+            navigation.navigate('Game', story.title);
         }
     }
 
+    //repeat speech button
     const repeatBtnHandler = () => {
         Speech.stop();
         Speech.speak(fillStory(story.story, blanks));
@@ -46,7 +56,7 @@ const Result = ({navigation, route}) => {
     return (
         <SafeAreaView style={styles.backgroundContainer}>
             <TouchableOpacity onPress={backBtnHandler}>
-                <Icon style={{marginTop: 15, marginStart: 15}} name="arrow-back" size={28}/>
+                <Icon style={styles.backBtn} name="arrow-back" size={28}/>
             </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
                 <View style={styles.title}>
@@ -79,6 +89,10 @@ const styles = StyleSheet.create({
     backgroundContainer: {
         flex: 1, 
         backgroundColor: "#CBC3E3"
+    },
+    backBtn: {
+        marginTop: 15,
+        marginStart: 15,
     },
     title: {
         flex: 0.10,

@@ -3,8 +3,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {View, Text, Image, SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native'
 
 const Play = ({navigation, route}) => {
+    //gets the story title and image and info
     const theme = route.params;
-
+    
+    //go to game page when you hit play button
     const handlePlayButton = () => {
         navigation.navigate("Game", theme.id);
     }
@@ -26,7 +28,6 @@ const Play = ({navigation, route}) => {
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>PLAY</Text>
                 </TouchableOpacity>
             </View>
-            
         </SafeAreaView>
     )
 }
@@ -42,7 +43,6 @@ const styles= StyleSheet.create({
         marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     detailsContainer: {
         flex: 0.55,
@@ -54,6 +54,7 @@ const styles= StyleSheet.create({
         paddingTop: 30
     },
     btn: {
+        alignSelf:'center',
         marginTop: 50,
         width: 290,
         marginHorizontal: 20,
@@ -62,7 +63,6 @@ const styles= StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-
     }
 });
 

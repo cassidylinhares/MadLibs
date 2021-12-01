@@ -33,29 +33,37 @@ export const db = getFirestore();
 // get story titles
 export async function getTitles() {
 	let titles = [];
+	try{
+		const docs = await getDocs(collection(db, "availableStories"));
+		docs.forEach(doc => {
+			titles.push(doc.get('title'));
+		});
 
-	const docs = await getDocs(collection(db, "availableStories"));
-	docs.forEach(doc => {
-		titles.push(doc.get('title'));
-	});
-
-	return titles;
+		return titles;
+	}catch(e) {
+		console.error(e);
+		return 'error';
+	}
 }
 
 // get story
 export const getStory = async (storyTitle) => {
 	let story = {title: null, story: null, blanks: []};
+	try{
+		const q = query(collection(db, "availableStories"), where("title", "==", storyTitle));
+		const docs = await getDocs(q);
+		
+		docs.forEach(doc => {
+			story.title = doc.get('title');
+			story.story = doc.get('story');
+			story.blanks = doc.get('blanks');
+		});
 
-	const q = query(collection(db, "availableStories"), where("title", "==", storyTitle));
-	const docs = await getDocs(q);
-	
-	docs.forEach(doc => {
-		story.title = doc.get('title');
-		story.story = doc.get('story');
-		story.blanks = doc.get('blanks');
-	});
-
-	return story;
+		return story;
+	}catch(e) {
+		console.error(e);
+		return 'error';
+	}
 }
 
 // save story
@@ -77,6 +85,7 @@ export const saveStory = async (storyTemplate, filledBlanks) => {
 		return 'success'
 	} catch (e) {
 		console.error(e);
+		return 'error';
 	}
 }
 
@@ -90,6 +99,6 @@ export async function getSavedStories() {
 		return savedStories;
 	} catch(e) {
 		console.error(e);
-		return 'failed'
+		return 'error'
 	}
 }

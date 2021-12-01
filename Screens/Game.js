@@ -15,8 +15,15 @@ const Game = ({navigation, route}) => {
     useEffect(() => {
         async function fetchStory() {
             const storyFetched = await getStory(theme);
-            setStory({...storyFetched});
-            setBlank([...storyFetched.blanks]);
+            if(storyFetched === "error") {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                console.error(errorCode, errorMessage);
+            } else {
+                setStory({...storyFetched});
+                setBlank([...storyFetched.blanks]);
+            }
         } 
         fetchStory();    
     }, []);
@@ -101,13 +108,15 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     input:{
+        width: 175,
         borderColor: '#5D3FD3',
         borderWidth: 1,
         borderRadius: 7,
         marginHorizontal:30
     },
     btn: {
-        marginTop: 50,
+        alignSelf:'center',
+        marginVertical: 50,
         width: 290,
         marginHorizontal: 35,
         height: 70,
