@@ -55,7 +55,7 @@ const Game = ({navigation, route}) => {
     return (
         <SafeAreaView style={styles.backgroundContainer}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-                <Icon style={{marginTop: 30, marginStart: 15}} name="arrow-back" size={28}/>
+                <Icon style={{marginTop: 50, marginStart: 15}} name="arrow-back" size={28}/>
             </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
                 <View style={styles.title}>

@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from '@firebase/auth';
 import { useNavigation } from '@react-navigation/core';
 import React, {useState, useEffect} from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, Image,TextInput, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase';
 
 const Login = () => {
@@ -56,6 +56,9 @@ const Login = () => {
             style={styles.container}
             behavior="height"
         >
+            <View style={{alignContent: 'center'}}>
+                <Image source={require('../assets/images/madlibslogo.jpg')} style={{width:140,height:140,borderRadius:100,marginTop:-70, marginBottom: 30,}}/>
+            </View>
             <View style={styles.inputContainer}>
                 <TextInput
                 placeholder="Email"

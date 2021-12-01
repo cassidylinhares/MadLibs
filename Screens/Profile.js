@@ -51,11 +51,11 @@ const Profile = ({navigation}) => {
     //the ui design
     return (
         <SafeAreaView>
-            <View style={styles.backButtonContainer} >
+            <View style={{padding:10, width:'100%', backgroundColor: "#CBC3E3", height:210} }>
                 <Icon style={styles.backButton}name="arrow-back" size={28} onPress={()=>navigation.goBack()}/>
             </View>
-            <View style={styles.imgContainer}>
-                <Image source={require('../assets/images/madlibslogo.jpg')} style={styles.img}/>
+            <View style={{alignContent: 'center'}}>
+                <Image source={require('../assets/images/madlibslogo.jpg')} style={{marginLeft: 30,width:140,height:140,borderRadius:100,marginTop:-70}}/>
             </View>
             <View>
                 <Text style={styles.titleText}>PROFILE</Text>
@@ -67,7 +67,9 @@ const Profile = ({navigation}) => {
             </View>
             
             <View style={styles.container}>
+                <TouchableOpacity onPress={()=> navigation.navigate('VideoPlayer')}>
                 <Text style={styles.text}>How to Play?</Text>
+                </TouchableOpacity>
             </View>
             <View style={[styles.container, {backgroundColor:"#CBC3E3"}] }>
                 <TouchableOpacity onPress={handleSignout}>
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
         height:200
     },
     backButton: {
-        marginTop: 30
+        marginTop: 45
     },
     imgContainer: {
         alignContent:'center',
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         shadowOpacity:80,
         elevation:15,
-        marginTop:50
+        marginTop:30
     },
     btnContainer:{
         alignSelf:'center',
