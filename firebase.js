@@ -69,7 +69,6 @@ export const saveStory = async (storyTemplate, filledBlanks) => {
 				history: arrayUnion(savedStory)
 			});  //last item in array is most recent
 		} else { //create and save
-			console.log('um')
 			await setDoc(docRef, {
 				history: [savedStory]
 			}); 
@@ -78,5 +77,19 @@ export const saveStory = async (storyTemplate, filledBlanks) => {
 		return 'success'
 	} catch (e) {
 		console.error(e);
+	}
+}
+
+// get user's stories
+export async function getSavedStories() {
+	let savedStories = [];
+	try {
+		const docs = await getDoc(doc(db, "savedStories", auth.currentUser.email));
+		savedStories = [...docs.data().history];
+
+		return savedStories;
+	} catch(e) {
+		console.error(e);
+		return 'failed'
 	}
 }

@@ -60,7 +60,7 @@ const Home = ({navigation}) => {
                 <Text style={{fontSize: 30, fontWeight: 'bold', color: 'black'}}>MAD LIBS</Text>
               </View>
               <TouchableOpacity>
-              <Icon style={{marginTop: 7,}} name="bars" size={30} color="#5D3FD3" onPress={() => navigation.navigate("Profile")}/>
+                <Icon style={{marginTop: 7,}} name="bars" size={30} color="#5D3FD3" onPress={() => navigation.navigate("Profile")}/>
               </TouchableOpacity>
             </View>
            

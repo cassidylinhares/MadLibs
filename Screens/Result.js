@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Speech from 'expo-speech';
 import { saveStory } from '../firebase';
+import { fillStory } from '../consts/common';
 import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -8,20 +9,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const Result = ({navigation, route}) => {
     const story = route.params.story;
     const blanks = route.params.blanks;
-
-    const fillStory = () => {
-        let words = story.story.split(' ');
-        let blanksTemp = [...blanks];
-
-        for(let i=0; i < words.length; i++){
-            if(words[i].includes('_')) {
-                let filled = words[i].replace('_', blanksTemp.shift());
-                words[i] = filled;
-            }
-        }
-
-        return words.join(' ');
-    }
 
     const saveBtnHandler = () => {
         saveStory(story, blanks)
@@ -33,12 +20,12 @@ const Result = ({navigation, route}) => {
     }
 
     const repeatBtnHandler = () => {
-        Speech.speak(fillStory());
+        Speech.speak(fillStory(story.story, blanks));
     }
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
-            <TouchableOpacity onPress={()=>navigation.goBack().goBack()}>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <Icon style={{marginTop: 30}} name="arrow-back" size={28}/>
             </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
@@ -46,7 +33,7 @@ const Result = ({navigation, route}) => {
                     <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{story?.title}</Text>
                 </View>
                 <View style={styles.body}>
-                    <Text>{fillStory()}</Text>
+                    <Text>{fillStory(story.story, blanks)}</Text>
                 </View>
                 <TouchableOpacity style={styles.btn} onPress={repeatBtnHandler}>
                     <Text style={styles.btnText}>Play Audio</Text>

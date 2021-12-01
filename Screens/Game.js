@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getStory } from '../firebase';
 
 const Game = ({navigation, route}) => {
@@ -46,6 +47,9 @@ const Game = ({navigation, route}) => {
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+                <Icon style={{marginTop: 30}} name="arrow-back" size={28}/>
+            </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
                 <View style={styles.title}>
                     <Text style={styles.btnText}>{story?.title}</Text>

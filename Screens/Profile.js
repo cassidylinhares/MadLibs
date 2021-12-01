@@ -1,9 +1,19 @@
-import { useNavigation } from '@react-navigation/core'
-import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
-import { auth } from '../firebase'
+import React, { useEffect, useState } from 'react';
+import { auth, getSavedStories } from '../firebase';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
 
 const Profile = ({navigation}) => {
+    const [savedStories, setSavedStories] = useState([]);
+
+    //do this when component loads
+    useEffect(() => {
+        async function fetchSavedStory() {
+            const storiesFetched = await getSavedStories();
+            setSavedStories([...storiesFetched]);
+        } 
+        fetchSavedStory(); 
+    }, []);
+
     //do this when sign out button is pressed
     const handleSignout = () => {
         auth.signOut()
@@ -21,7 +31,12 @@ const Profile = ({navigation}) => {
     //the ui design
     return (
         <SafeAreaView style={styles.container}>
-            <Text>{auth.currentUser?.email}</Text>
+            <View>
+                <Text>{auth.currentUser?.email}</Text>
+            </View>
+            <View>
+                {console.log(savedStories)}
+            </View>
             <TouchableOpacity style={[styles.button, styles.buttonContainer]} onPress={handleSignout}>
                 <Text style={styles.buttonText}>Sign Out</Text>
             </TouchableOpacity>
