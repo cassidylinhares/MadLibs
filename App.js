@@ -9,6 +9,7 @@ import Home from './Screens/Home';
 import Play from './Screens/Play';
 import Game from './Screens/Game';
 import Profile from './Screens/Profile';
+import VideoPlayer from './Screens/VideoPlayer';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,7 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Play" component={Play} />
         <Stack.Screen options={{ headerShown: false }} name="Game" component={Game} />
         <Stack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
-
+        <Stack.Screen options={{ headerShown: false }} name="VideoPlayer" component={VideoPlayer} />
       </Stack.Navigator> 
     </NavigationContainer>
   );

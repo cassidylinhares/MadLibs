@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, Content, List, ListItem, View, FlatList, TouchableOpacity, TextInput, SafeAreaView, Container } from 'react-native'
 import { auth } from '../firebase'
 
 const Profile = ({navigation}) => {
@@ -21,10 +21,16 @@ const Profile = ({navigation}) => {
     //the ui design
     return (
         <SafeAreaView style={styles.container}>
+        
             <Text>{auth.currentUser?.email}</Text>
             <TouchableOpacity style={[styles.button, styles.buttonContainer]} onPress={handleSignout}>
                 <Text style={styles.buttonText}>Sign Out</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("VideoPlayer")}>
+                        <Text>How To Play</Text>
+            </TouchableOpacity>
+                        <Text>Saved Stories</Text>
+                    
         </SafeAreaView>
     )
 }
