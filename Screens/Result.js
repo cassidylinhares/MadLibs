@@ -9,14 +9,33 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const Result = ({navigation, route}) => {
     const story = route.params.story;
     const blanks = route.params.blanks;
+    const fromProfile = route.params.fromSaved;
+
+    const backBtnHandler = () => {
+        Speech.stop()
+        if(fromProfile) {
+            navigation.goBack()
+        }else{
+            navigation.navigate('Home')
+        }
+    }
 
     const saveBtnHandler = () => {
         saveStory(story, blanks)
-        .then(res => console.log(res));
+        .then(res => {
+            console.log(res);
+            navigation.navigate('Home');
+            Speech.stop()
+        });
     }
 
-    const backBtnHandler = () => {
-        navigation.goBack()
+    const playAgainHandler = () => {
+        Speech.stop()
+        if(!fromProfile) {
+            navigation.goBack()
+        }else{
+            navigation.navigate('Game', story.title)
+        }
     }
 
     const repeatBtnHandler = () => {
@@ -25,12 +44,12 @@ const Result = ({navigation, route}) => {
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
-            <TouchableOpacity onPress={()=>navigation.goBack()}>
-                <Icon style={{marginTop: 30}} name="arrow-back" size={28}/>
+            <TouchableOpacity onPress={backBtnHandler}>
+                <Icon style={{marginTop: 15, marginStart: 15}} name="arrow-back" size={28}/>
             </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
                 <View style={styles.title}>
-                    <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{story?.title}</Text>
+                    <Text style={styles.titleText}>{story?.title}</Text>
                 </View>
                 <View style={styles.body}>
                     <Text>{fillStory(story.story, blanks)}</Text>
@@ -38,10 +57,12 @@ const Result = ({navigation, route}) => {
                 <TouchableOpacity style={styles.btn} onPress={repeatBtnHandler}>
                     <Text style={styles.btnText}>Play Audio</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btn} onPress={saveBtnHandler}>
-                    <Text style={styles.btnText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btn} onPress={backBtnHandler}>
+                {!fromProfile && 
+                    <TouchableOpacity style={styles.btn} onPress={saveBtnHandler}>
+                        <Text style={styles.btnText}>Save</Text>
+                    </TouchableOpacity>
+                }
+                <TouchableOpacity style={styles.btn} onPress={playAgainHandler}>
                     <Text style={styles.btnText}>Play Again</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -69,6 +90,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
+    },
+    titleText: {
+        color: 'grey', 
+        fontSize:16, 
+        lineHeight: 22, 
+        marginTop: 8
     },
     detailsContainer: {
         flex: 1,

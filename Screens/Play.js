@@ -6,7 +6,7 @@ const Play = ({navigation, route}) => {
     const theme = route.params;
 
     const handlePlayButton = () => {
-        navigation.navigate("Game", theme);
+        navigation.navigate("Game", theme.id);
     }
 
     return (

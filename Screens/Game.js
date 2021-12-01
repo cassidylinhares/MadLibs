@@ -14,7 +14,7 @@ const Game = ({navigation, route}) => {
     //on initializing the component
     useEffect(() => {
         async function fetchStory() {
-            const storyFetched = await getStory(theme.id);
+            const storyFetched = await getStory(theme);
             setStory({...storyFetched});
             setBlank([...storyFetched.blanks]);
         } 
@@ -41,7 +41,7 @@ const Game = ({navigation, route}) => {
 
     const readStoryBtnHandler = () => {
         // if(counter == blanks.length) {
-            navigation.navigate("Result", {story: story, blanks: blanks});
+            navigation.navigate("Result", {story: story, blanks: blanks, fromSaved: false});
         // }
     }
 
