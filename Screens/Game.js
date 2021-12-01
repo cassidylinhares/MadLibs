@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { getStory } from '../firebase';
 
 const Game = ({navigation, route}) => {
@@ -9,6 +8,7 @@ const Game = ({navigation, route}) => {
 
     const [story, setStory] = useState({});
     const [blanks, setBlank] = useState([]);
+    let blankCounter = 0;
     
     //on initializing the component
     useEffect(() => {
@@ -27,6 +27,7 @@ const Game = ({navigation, route}) => {
             let blanksTemp = blanks; //copy blanks
             blanksTemp[i] = text; //alter the copy
             setBlank(blanksTemp); //change it to the altered copy
+            blankCounter++;
         }
         //the ui
         return story?.blanks?.map((blank, index) => (
@@ -38,22 +39,23 @@ const Game = ({navigation, route}) => {
     }
 
     const readStoryBtnHandler = () => {
-        navigation.navigate("Result", theme)
+        // if(counter == blanks.length) {
+            navigation.navigate("Result", {story: story, blanks: blanks});
+        // }
     }
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: "#CBC3E3"}}>
-        <View style={styles.detailsContainer}>
-            <View style={styles.title}>
-                <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{story?.title}</Text>
-            </View>
-            {story !== null && mapBlanks()}
-            <TouchableOpacity style={styles.btn} onPress={readStoryBtnHandler}>
-                <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>Read Story</Text>
-            </TouchableOpacity>
-        </View>
-        
-    </SafeAreaView>
+        <SafeAreaView style={styles.backgroundContainer}>
+            <ScrollView style={styles.detailsContainer}>
+                <View style={styles.title}>
+                    <Text style={styles.btnText}>{story?.title}</Text>
+                </View>
+                {story !== null && mapBlanks()}
+                <TouchableOpacity style={styles.btn} onPress={readStoryBtnHandler}>
+                    <Text style={styles.btnText}>Read Story</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
@@ -71,6 +73,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
+    },
+    backgroundContainer: {
+        flex: 1, 
+        backgroundColor: "#CBC3E3"
     },
     detailsContainer: {
         flex: 1,
@@ -91,7 +97,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 30,
 
-    }
+    },
+    btnText: {
+        color: 'white', 
+        fontSize: 18, 
+        fontWeight: 'bold',
+    },
 });
 
 export default Game;

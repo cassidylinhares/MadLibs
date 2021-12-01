@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import * as firebase from "firebase/app";
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, query, where, arrayUnion } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -59,3 +59,24 @@ export const getStory = async (storyTitle) => {
 }
 
 // save story
+export const saveStory = async (storyTemplate, filledBlanks) => {
+	let savedStory = {...storyTemplate, filled: filledBlanks};
+	const docRef = doc(db, 'savedStories', auth.currentUser.email);
+	try {
+		const docSnap = await getDoc(docRef); 
+		if (docSnap.exists()) { //update if doc exist
+			await updateDoc(docRef, {
+				history: arrayUnion(savedStory)
+			});  //last item in array is most recent
+		} else { //create and save
+			console.log('um')
+			await setDoc(docRef, {
+				history: [savedStory]
+			}); 
+		}
+		
+		return 'success'
+	} catch (e) {
+		console.error(e);
+	}
+}
