@@ -4,8 +4,7 @@ import { StyleSheet,ScrollView, Text, View, FlatList, TouchableOpacity, Image, T
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { auth } from '../firebase'
 
-class Profile extends Component {
-    render() {
+const Profile = ({navigation}) => {
     //do this when sign out button is pressed
     const handleSignout = () => {
         auth.signOut()
@@ -22,28 +21,71 @@ class Profile extends Component {
 
     //the ui design
     return (
-        <View>
-            <ScrollView>
-                <View  style={{padding:10, width:'100%', backgroundColor: "#CBC3E3", height:210}} >
-                <Icon style={{marginTop: 30}}name="arrow-back" size={28} onPress={() => {this.props.navigation.goBack()}}/>
+        <SafeAreaView>
+            <View  style={{padding:10, width:'100%', backgroundColor: "#CBC3E3", height:200}} >
+                <Icon style={{marginTop: 30}}name="arrow-back" size={28} onPress={()=>navigation.goBack()}/>
+            </View>
+            <View style={{alignContent:'center'}}>
+            <Image source={require('../assets/images/madlibslogo.jpg')} style={{marginLeft: 30, width:140,height:140,borderRadius:100,marginTop:-70}}/>
+            </View>
+            <View>
+                <Text style={{fontSize:35, fontWeight:'bold', marginLeft: 30}}>PROFILE</Text>
+                <Text style={{fontSize:20, fontWeight:'bold',color:'grey', marginLeft:30, color: '#5D3FD3'}}>{auth.currentUser?.email}</Text>
+            </View>
+            <View style={{
+                    alignSelf:'center',
+                    flexDirection:'row',
+                    justifyContent:'center',
+                    backgroundColor:"white",
+                    width:'100%',
+                    padding:20,
+                    paddingBottom:22,
+                    borderRadius:10,
+                    shadowOpacity:80,
+                    elevation:15,
+                    marginTop:50
+                }}>
+                    <Text style={{fontWeight:'bold', textAlign:'center',fontSize:30}}>Saved Stories</Text>
+
                 </View>
-                <View style={{alignContent:'centre', justifyContent:"center"}}>
-                <Image source={require('../assets/images/madlibslogo.jpg')} style={{width:140,height:140,borderRadius:100,marginTop:-70}}></Image>
-                <Text style={{fontSize:35, fontWeight:'bold',padding:10}}>PROFILE</Text>
-                <Text style={{fontSize:20, fontWeight:'bold',color:'grey'}}>{auth.currentUser?.email}</Text>
+                <View style={{
+                    alignSelf:'center',
+                    flexDirection:'row',
+                    justifyContent:'center',
+                    backgroundColor:"white",
+                    width:'100%',
+                    padding:20,
+                    paddingBottom:22,
+                    borderRadius:10,
+                    shadowOpacity:80,
+                    elevation:15,
+                    marginTop:20
+                }}>
+                    <Text style={{fontWeight:'bold', textAlign:'center',fontSize:30}}>How to Play?</Text>
+
                 </View>
-                
-            </ScrollView>
-           
-    
-            <TouchableOpacity style={[styles.button, styles.buttonContainer]} onPress={handleSignout}>
-                <Text style={styles.buttonText}>Sign Out</Text>
-            </TouchableOpacity>
-        
-        </View>
+                <View style={{
+                    alignSelf:'center',
+                    flexDirection:'row',
+                    justifyContent:'center',
+                    backgroundColor:"#CBC3E3",
+                    width:'100%',
+                    padding:20,
+                    paddingBottom:22,
+                    borderRadius:10,
+                    shadowOpacity:80,
+                    elevation:15,
+                    marginTop:20
+                }}>
+                    <TouchableOpacity onPress={handleSignout}>
+                    <Text style={{fontWeight:'bold', textAlign:'center',fontSize:30}}>Sign Out</Text>
+                    </TouchableOpacity>
+                </View>
+
+        </SafeAreaView>
     );  
   }
-}
+
 
 //allow this component to be used elsewhere in the code
 export default Profile;
