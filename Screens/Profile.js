@@ -40,8 +40,8 @@ const Profile = ({navigation}) => {
                 <Image source={require('../assets/images/madlibslogo.jpg')} style={{marginLeft: 30, width:140,height:140,borderRadius:100,marginTop:-70}}/>
             </View>
             <View>
-                <Text style={{fontSize:35, fontWeight:'bold', marginLeft: 30}}>PROFILE</Text>
-                <Text style={{fontSize:20, fontWeight:'bold',color:'grey', marginLeft:30, color: '#5D3FD3'}}>{auth.currentUser?.email}</Text>
+                <Text style={{fontSize:35, fontWeight:'bold', marginLeft: 20}}>PROFILE</Text>
+                <Text style={{fontSize:20, fontWeight:'bold',color:'grey', marginLeft:20, color: '#5D3FD3'}}>{auth.currentUser?.email}</Text>
             </View>
             <View style={{
                     alignSelf:'center',
