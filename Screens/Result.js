@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as Speech from 'expo-speech';
+import { saveStory } from '../firebase';
 import { StyleSheet, Text, SafeAreaView, View, TouchableOpacity, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 //route has story and blanks
 const Result = ({navigation, route}) => {
-    console.log(route)
     const story = route.params.story;
     const blanks = route.params.blanks;
 
     const fillStory = () => {
         let words = story.story.split(' ');
+        let blanksTemp = [...blanks];
+
         for(let i=0; i < words.length; i++){
-            console.log(words[i].includes('_'), words[i])
             if(words[i].includes('_')) {
-                let filled = words[i].replace('_', blanks.shift());
+                let filled = words[i].replace('_', blanksTemp.shift());
                 words[i] = filled;
             }
         }
@@ -21,14 +23,24 @@ const Result = ({navigation, route}) => {
         return words.join(' ');
     }
 
-    const saveBtnHandler = () => {}
-    const backBtnHandler = () => {}
+    const saveBtnHandler = () => {
+        saveStory(story, blanks)
+        .then(res => console.log(res));
+    }
+
+    const backBtnHandler = () => {
+        navigation.goBack()
+    }
+
     const repeatBtnHandler = () => {
-        Speech.speak(filledStory);
+        Speech.speak(fillStory());
     }
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
+            <TouchableOpacity onPress={()=>navigation.goBack().goBack()}>
+                <Icon style={{marginTop: 30}} name="arrow-back" size={28}/>
+            </TouchableOpacity>
             <ScrollView style={styles.detailsContainer}>
                 <View style={styles.title}>
                     <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{story?.title}</Text>

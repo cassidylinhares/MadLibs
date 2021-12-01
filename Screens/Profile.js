@@ -1,9 +1,11 @@
 import { useNavigation } from '@react-navigation/core'
-import React from 'react'
-import { StyleSheet, Text, Content, List, ListItem, View, FlatList, TouchableOpacity, TextInput, SafeAreaView, Container } from 'react-native'
+import React, {Component} from 'react'
+import { StyleSheet,ScrollView, Text, View, FlatList, TouchableOpacity, Image, TextInput, SafeAreaView } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { auth } from '../firebase'
 
-const Profile = ({navigation}) => {
+class Profile extends Component {
+    render() {
     //do this when sign out button is pressed
     const handleSignout = () => {
         auth.signOut()
@@ -20,19 +22,27 @@ const Profile = ({navigation}) => {
 
     //the ui design
     return (
-        <SafeAreaView style={styles.container}>
-        
-            <Text>{auth.currentUser?.email}</Text>
+        <View>
+            <ScrollView>
+                <View  style={{padding:10, width:'100%', backgroundColor: "#CBC3E3", height:210}} >
+                <Icon style={{marginTop: 30}}name="arrow-back" size={28} onPress={() => {this.props.navigation.goBack()}}/>
+                </View>
+                <View style={{alignContent:'centre', justifyContent:"center"}}>
+                <Image source={require('../assets/images/madlibslogo.jpg')} style={{width:140,height:140,borderRadius:100,marginTop:-70}}></Image>
+                <Text style={{fontSize:35, fontWeight:'bold',padding:10}}>PROFILE</Text>
+                <Text style={{fontSize:20, fontWeight:'bold',color:'grey'}}>{auth.currentUser?.email}</Text>
+                </View>
+                
+            </ScrollView>
+           
+    
             <TouchableOpacity style={[styles.button, styles.buttonContainer]} onPress={handleSignout}>
                 <Text style={styles.buttonText}>Sign Out</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("VideoPlayer")}>
-                        <Text>How To Play</Text>
-            </TouchableOpacity>
-                        <Text>Saved Stories</Text>
-                    
-        </SafeAreaView>
-    )
+        
+        </View>
+    );  
+  }
 }
 
 //allow this component to be used elsewhere in the code
