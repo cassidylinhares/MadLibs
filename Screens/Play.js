@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {View, Text, Image, SafeAreaView, StyleSheet} from 'react-native'
+import {View, Text, Image, SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native'
 
 const Play = ({navigation, route}) => {
     const theme = route.params;
@@ -22,9 +22,9 @@ const Play = ({navigation, route}) => {
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>Tease</Text>
                     <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{theme.about}</Text>
                 </View>
-                <View style={styles.btn}>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}} onPress={handlePlayButton}>PLAY</Text>
-                </View>
+                <TouchableOpacity style={styles.btn} onPress={handlePlayButton}>
+                    <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>PLAY</Text>
+                </TouchableOpacity>
             </View>
             
         </SafeAreaView>

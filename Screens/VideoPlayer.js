@@ -1,9 +1,14 @@
 import React from 'react'
-import { StyleSheet, Content, List, Text, View, FlatList, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-
-const VideoPlayer = () =>{
-
+const VideoPlayer = () => {
+    return (
+        <View>
+            <Text></Text>
+        </View>
+    )
 }
 
 export default VideoPlayer;
+
+const styles = StyleSheet.create({})
