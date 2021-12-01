@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import { getStory } from '../firebase';
 
 const Game = ({navigation, route}) => {
@@ -37,6 +37,10 @@ const Game = ({navigation, route}) => {
         ));
     }
 
+    const readStoryBtnHandler = () => {
+        navigation.navigate("Result", theme)
+    }
+
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#CBC3E3"}}>
         <View style={styles.detailsContainer}>
@@ -44,9 +48,9 @@ const Game = ({navigation, route}) => {
                 <Text style={{color: 'grey', fontSize:16, lineHeight: 22, marginTop: 8}}>{story?.title}</Text>
             </View>
             {story !== null && mapBlanks()}
-            <View style={styles.btn} >
+            <TouchableOpacity style={styles.btn} onPress={readStoryBtnHandler}>
                 <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>Read Story</Text>
-            </View>
+            </TouchableOpacity>
         </View>
         
     </SafeAreaView>
