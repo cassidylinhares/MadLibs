@@ -9,6 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    //do this when user hits register button
     const handleRegister = () => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -24,6 +25,7 @@ const Login = () => {
         });
     }
 
+    //do this when user hits login button
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
