@@ -83,8 +83,8 @@ const Home = ({navigation}) => {
                 columnWrapperStyle={{justifyContent: 'space-evenly'}}
                 showsVerticalScrollIndicator= {false}
                 contentContainerStyle={{
-                    paddingTop:20,
-                    paddingBottom: 50,
+                    height:Dimensions.get("screen").height,
+                    paddingTop:10,
                     paddingHorizontal:5, 
                     backgroundColor: "#5D3FD3"
                 }}
